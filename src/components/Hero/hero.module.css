@@ -1,0 +1,125 @@
+.image {
+  object-fit: cover;
+  width: 110%;
+  height: 1000px;
+  filter: blur(4px);
+  -webkit-mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.5)
+  );
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+}
+
+.cover {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.fullWidth {
+  z-index: -1;
+
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  margin-left: -50%;
+  margin-right: -50%;
+}
+
+.albumCoverContainer {
+  display: flex;
+  position: relative;
+  padding-top: 132px;
+  gap: 52px;
+
+  @media (--query-tablet) {
+    flex-direction: column;
+  }
+}
+
+.albumCoverContainer .column {
+  flex: 1;
+  position: relative;
+}
+
+.albumCoverContainer .metadata {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg) translateX(130%);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1rem;
+
+  span {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  @media (--query-tablet) {
+    position: static;
+    writing-mode: revert;
+    transform: rotate(0) translateX(0);
+    margin-top: 16px;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .buttons {
+    display: flex;
+    gap: 8px;
+
+    @media (--query-mobile) {
+      flex-direction: column;
+    }
+  }
+}
+
+.info h1 {
+  font-family: var(--font-stroke);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 4rem;
+  color: white;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+  line-height: 1.1;
+
+  @media (--query-laptop) {
+    font-size: 3.2rem;
+  }
+
+  @media (--query-tablet) {
+  }
+
+  @media (--query-mobile) {
+  }
+}
+
+.info h2 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 2.2rem;
+
+  @media (--query-laptop) {
+    font-size: 1.8rem;
+  }
+
+  @media (--query-tablet) {
+  }
+
+  @media (--query-mobile) {
+  }
+}

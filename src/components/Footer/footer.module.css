@@ -1,0 +1,145 @@
+.footerBody {
+  --footer-font-size: 1.125rem;
+
+  width: 100%;
+  display: flex;
+
+  padding-top: 56px;
+  padding-bottom: 56px;
+
+  border-top: 2px solid var(--color-white);
+  border-bottom: 2px solid var(--color-white);
+
+  font-family: var(--font-display);
+  font-size: var(--footer-font-size);
+  font-weight: 600;
+
+  @media (--query-tablet) {
+    --footer-font-size: 0.85rem;
+  }
+
+  @media (--query-mobile) {
+    flex-direction: column;
+  }
+}
+
+.footerCol {
+  flex: 1;
+  padding-right: 16px;
+
+  &.form {
+    padding-right: 0;
+  }
+
+  @media (--query-mobile) {
+    padding-right: 0;
+  }
+}
+
+.footerList {
+  list-style: none;
+  padding-left: 0;
+  line-height: 1.75;
+
+  a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: inherit;
+  }
+}
+
+.copyright,
+.disclaimer {
+  font-family: var(--font-body);
+  color: var(--color-gray-100);
+}
+
+.copyright {
+  padding: 16px 0;
+
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 0.1rem;
+}
+
+.disclaimer {
+  padding: 48px 0px;
+
+  padding-top: 16px;
+  padding-bottom: 128px;
+  padding-left: 48px;
+  padding-right: 48px;
+  text-align: center;
+  font-size: 0.75rem;
+  font-family: var(--font-body);
+  font-style: italic;
+  color: var(--color-gray-500);
+}
+
+.form {
+  font-family: var(--font-body);
+
+  @media (--query-mobile) {
+    padding-top: 16px;
+  }
+
+  .iconInput {
+    display: flex;
+
+    margin-top: 8px;
+
+    border-bottom: 1px solid var(--color-white);
+    svg {
+      pointer-events: none;
+    }
+  }
+
+  h3 {
+    font-size: var(--footer-font-size);
+    text-transform: uppercase;
+    font-family: var(--font-display);
+    color: var(--color-gray-500);
+  }
+  p {
+    color: white;
+    font-size: 0.875rem;
+    letter-spacing: 0.1rem;
+    font-style: italic;
+    font-weight: 400;
+    padding: 16px 0;
+  }
+  label {
+    color: var(--color-gray-100);
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+  input[type="email"] {
+    display: block;
+    font-size: var(--footer-font-size);
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    color: inherit;
+    font-weight: 400;
+    width: 100%;
+
+    &::placeholder {
+      font-weight: 400;
+      color: var(--color-gray-500);
+    }
+  }
+  button {
+    appearance: none;
+    border: none;
+    padding: 8px 16px;
+    background: none;
+    background-color: var(--color-white);
+
+    &:hover {
+      background-color: var(--color-black);
+      svg {
+        stroke: var(--color-white);
+      }
+    }
+  }
+}

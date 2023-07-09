@@ -1,0 +1,11 @@
+.wrapper {
+  margin-top: 72px;
+
+  @media (--query-tablet) {
+    margin-top: 64px;
+  }
+
+  @media (--query-mobile) {
+    margin-top: 48px;
+  }
+}

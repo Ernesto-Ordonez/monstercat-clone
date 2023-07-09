@@ -1,0 +1,8 @@
+/* Mobile - 600px */
+@custom-media --query-mobile (max-width: 37.5rem);
+
+/* Tablet - 950px */
+@custom-media --query-tablet (max-width: 68rem);
+
+/* Laptop - 1300px */
+@custom-media --query-laptop (max-width: 81.25rem);

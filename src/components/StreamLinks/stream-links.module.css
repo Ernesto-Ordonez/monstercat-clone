@@ -1,0 +1,78 @@
+.wrapper {
+  display: flex;
+  width: fit-content;
+}
+
+.buttonWrapper {
+  --highlight-color: var(--color-white);
+  line-height: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+  padding: 24px;
+  background-color: none;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  flex: 1 0 max-content;
+
+  &:last-of-type {
+    border-right: 1px solid white;
+  }
+
+  &:hover {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--highlight-color);
+    color: black;
+  }
+
+  &:hover svg {
+    fill: black;
+  }
+
+  svg {
+    display: inline-block;
+  }
+
+  span {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+
+  @media (--query-laptop) {
+    padding: 20px;
+  }
+
+  @media (--query-tablet) {
+    padding: 16px;
+  }
+
+  @media (--query-mobile) {
+    padding: 8px;
+
+    span {
+      font-size: 0.7rem;
+    }
+  }
+}
+
+.tooltip {
+  color: var(--color-black);
+  background-color: var(--color-white);
+  padding: 4px 10px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.arrow {
+  fill: var(--color-white);
+  transform: translateY(-1px);
+}

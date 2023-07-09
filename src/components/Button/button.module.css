@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing);
+  width: max-content;
+  border: var(--border);
+  background-color: var(--background-color);
+  color: white;
+  font-weight: 600;
+  font-size: 1.25rem;
+  cursor: pointer;
+  outline-offset: 2px;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--font-size);
+  text-transform: uppercase;
+  transition: color 0.6s, background 0.6s, border 0.6s;
+
+  @media (--query-mobile) {
+    font-size: 0.8rem;
+    padding: 12px 20px;
+  }
+
+  svg {
+    transition: stroke 0.6s;
+  }
+
+  &:hover {
+    color: var(--color-black);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-white);
+    transition: color 0.2s, background 0.2s, border 0.2s;
+
+    svg {
+      transition: stroke 0.2s;
+      stroke: var(--color-black);
+    }
+  }
+}

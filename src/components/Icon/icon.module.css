@@ -1,0 +1,22 @@
+.icon {
+  display: block;
+  height: var(--size);
+  width: var(--size);
+  stroke: var(--stroke);
+  stroke-width: var(--stroke-width);
+  fill: var(--fill);
+  transform: translateY(var(--offsetY));
+}
+
+.rotate {
+  animation: rotateInfinite 1000ms linear infinite;
+}
+
+@keyframes rotateInfinite {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

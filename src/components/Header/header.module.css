@@ -1,0 +1,44 @@
+.header {
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  /* 
+        Para que aparezca sobre el contenido
+        pero siento que va a traer problemas despues 
+    */
+  z-index: 1;
+
+  @media (--query-tablet) {
+    background-color: hsla(340, 10%, 6%, 0.5);
+    backdrop-filter: blur(4px);
+  }
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  margin-left: auto;
+  margin-right: auto;
+  /* max-width: calc(var(--max-width) + 64px); */
+  max-width: var(--max-width);
+  @media (--query-laptop) {
+    max-width: revert;
+    padding: 12px 20px;
+  }
+  @media (--query-tablet) {
+    padding: 8px 48px;
+  }
+  @media (--query-mobile) {
+    padding: 8px 24px;
+  }
+}
+
+.logo {
+  width: 52px;
+  height: auto;
+  object-fit: cover;
+}

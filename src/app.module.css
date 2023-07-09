@@ -1,0 +1,143 @@
+.wrapper {
+  --spacing: 192px;
+  --max-width: 100rem;
+
+  max-width: var(--max-width);
+  min-height: 100%;
+
+  padding-left: var(--spacing);
+  padding-right: var(--spacing);
+  margin-right: auto;
+  margin-left: auto;
+
+  width: 100%;
+
+  @media (--query-laptop) {
+    --max-width: 70rem;
+    --spacing: 96px;
+  }
+
+  @media (--query-tablet) {
+    --max-width: 50rem;
+    --spacing: 48px;
+  }
+
+  @media (--query-mobile) {
+    --spacing: 24px;
+  }
+}
+
+.container {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+}
+
+.grain {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  min-height: 100%;
+  min-width: 100%;
+  background-image: url("./assets/background-tile.webp");
+}
+
+.grain::after {
+  animation: grain 8s steps(10) infinite;
+  background-image: url("./assets/background-tile.webp");
+  content: "";
+  height: 300%;
+  left: -50%;
+  opacity: 0.4;
+  position: fixed;
+  top: -100%;
+  width: 300%;
+}
+
+.sectionHeader {
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  color: var(--color-white);
+
+  @media (--query-laptop) {
+    font-size: 2.2rem;
+  }
+
+  @media (--query-tablet) {
+    font-size: 1.8rem;
+  }
+
+  @media (--query-mobile) {
+    font-size: 1.4rem;
+  }
+}
+
+.queryDebug {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  padding: 8px 16px;
+  border-radius: 3000px;
+  color: white;
+  background-color: blue;
+
+  @media (--query-laptop) {
+    background-color: gold;
+  }
+
+  @media (--query-tablet) {
+    background-color: purple;
+  }
+
+  @media (--query-mobile) {
+    background-color: pink;
+  }
+}
+
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-5%, -10%);
+  }
+
+  20% {
+    transform: translate(-15%, 5%);
+  }
+
+  30% {
+    transform: translate(7%, -25%);
+  }
+
+  40% {
+    transform: translate(-5%, 25%);
+  }
+
+  50% {
+    transform: translate(-15%, 10%);
+  }
+
+  60% {
+    transform: translate(15%, 0%);
+  }
+
+  70% {
+    transform: translate(0%, 15%);
+  }
+
+  80% {
+    transform: translate(3%, 35%);
+  }
+
+  90% {
+    transform: translate(-10%, 10%);
+  }
+}

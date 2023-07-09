@@ -1,0 +1,80 @@
+.wrapper {
+  width: 100%;
+
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+.iconButton {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  position: relative;
+
+  &:hover::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: hsla(0, 0%, 100%, 0.2);
+    border-radius: 1000px;
+    width: 64px;
+    height: 64px;
+
+    @media (--query-mobile) {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  &:active::before {
+    background-color: hsla(0, 0%, 100%, 0.5);
+  }
+}
+
+.track {
+  display: grid;
+  grid-template-columns: max-content max-content 1fr max-content max-content;
+  padding: 16px 0;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  td {
+    padding: 8px 16px;
+  }
+
+  td:first-of-type {
+    padding-left: 0;
+  }
+
+  td:last-of-type {
+    padding-right: 0;
+  }
+
+  @media (--query-mobile) {
+    td {
+      padding: 4px 8px;
+    }
+    td:first-of-type {
+      padding-left: 0;
+    }
+
+    td:last-of-type {
+      padding-right: 0;
+    }
+  }
+}
+
+.trackData {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.2;
+
+  .artist {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+}

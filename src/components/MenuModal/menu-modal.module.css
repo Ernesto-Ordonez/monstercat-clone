@@ -1,0 +1,159 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-black);
+  opacity: 0.75;
+}
+
+.content {
+  --modal-spacing: 32px;
+
+  display: flex;
+  flex-direction: column;
+
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  top: 0;
+  background-color: var(--color-black);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  padding: var(--modal-spacing);
+}
+
+.logo {
+  display: block;
+  height: 40px;
+  width: auto;
+  margin-right: auto;
+}
+
+.iconButton {
+  --btn-size: 64px;
+
+  appearance: none;
+  position: relative;
+  background: none;
+  min-width: var(--btn-size);
+  min-height: var(--btn-size);
+  /* border: 1px solid var(--color-white); */
+  border: none;
+  border-radius: 4000px;
+
+  flex-basis: var(--btn-size);
+  flex-shrink: 0;
+  flex-grow: 0;
+
+  display: grid;
+  place-content: center;
+
+  &:hover {
+    background-color: var(--color-gray-800);
+  }
+}
+
+.loginControls {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+  align-self: flex-end;
+  padding: var(--modal-spacing);
+  margin-top: auto;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  padding: var(--modal-spacing);
+
+  /* 
+    Para permitir el scroll en el menu de
+    navegación (en especial cuando se abren
+    los sub-menus
+  */
+  overflow: auto;
+}
+
+.accordionItem {
+  display: block;
+}
+
+.navLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 0;
+  border: none;
+  background: none;
+
+  margin-bottom: 16px;
+
+  &.secondary {
+    color: var(--color-gray-500);
+  }
+}
+
+.secondaryMenu {
+  padding-left: 16px;
+  padding-bottom: 8px;
+
+  li {
+    list-style: none;
+  }
+
+  a {
+    color: inherit;
+  }
+}
+
+.trigger {
+  svg {
+    transition: transform 300ms;
+    display: inline-block;
+  }
+}
+
+.trigger[data-state="open"] > svg {
+  transform: rotate(90deg);
+}
+
+.accordionContent {
+  overflow: hidden;
+}
+.accordionContent[data-state="open"] {
+  animation: slideDown 300ms ease-out;
+}
+.accordionContent[data-state="closed"] {
+  animation: slideUp 300ms ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
