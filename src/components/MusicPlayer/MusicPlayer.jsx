@@ -176,7 +176,6 @@ const MusicPlayer = ({
         </button>
       </div>
       <div className={styles.songProgress}>
-        <span>{elapsedDisplay}</span>
         <ProgressBar
           duration={duration}
           currentProgress={currrentProgress}
@@ -189,23 +188,16 @@ const MusicPlayer = ({
             setCurrrentProgress(e.currentTarget.valueAsNumber);
           }}
         />
+        <span>{elapsedDisplay}</span>
         <span>-{remainingDisplay}</span>
       </div>
 
       <div className={styles.volumeControlGroup}>
-        <button
-          className={styles.iconButton}
-          onClick={handleMuteUnmute}
-          aria-label={volume === 0 ? "Unmute" : "Mute"}
-          style={{ "--btn-size": 48 + "px" }}
-        >
-          {volume === 0 ? (
-            <Icon id="unmute" size={16} strokeWidth={4} color="white" />
-          ) : (
-            <Icon id="mute" size={16} strokeWidth={4} color="white" />
-          )}
-        </button>
-        <VolumeInput volume={volume} onVolumeChange={handleVolumeChange} />
+        <VolumeInput
+          volume={volume}
+          onVolumeChange={handleVolumeChange}
+          handleMuteUnmute={handleMuteUnmute}
+        />
       </div>
     </div>
   );

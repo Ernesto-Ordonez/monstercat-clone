@@ -22,27 +22,41 @@
   backdrop-filter: blur(4px);
   border-top: 1px solid var(--color-white);
 
-  display: flex;
-  font-family: var(--font-body);
-  gap: 32px;
+  display: grid;
+  gap: 16px 32px;
+  grid-template-columns: 18ch max-content 4fr minmax(200px, 15%);
+  grid-template-areas: "track-info controls song-progress volume-control";
 
+  font-family: var(--font-body);
   font-size: 0.9rem;
 
   overflow: auto;
 
   @media (--query-tablet) {
-    flex-direction: column;
+    padding-top: 32px;
+    padding-bottom: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      "song-progress song-progress song-progress"
+      "track-info controls volume-control";
   }
 
   @media (--query-mobile) {
+    grid-template-columns: 2fr 1fr;
+    gap: 0px 32px;
+    grid-template-areas:
+      "song-progress song-progress"
+      "controls controls"
+      "track-info volume-control";
   }
 }
 
 .trackInfo {
+  grid-area: track-info;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex-basis: 20ch;
 
   .title {
     font-weight: 700;
@@ -55,16 +69,42 @@
 }
 
 .songProgress {
+  grid-area: song-progress;
   display: grid;
-  grid-template-columns: 6ch 1fr 6ch;
+  grid-template-columns: 5ch 1fr 5ch;
   width: 100%;
   align-items: center;
   gap: 16px;
 
+  div {
+    grid-column: 2 / 4;
+    grid-row: 1 / 1;
+    @media (--query-mobile) {
+      grid-column: 1 / 5;
+    }
+  }
+
   span {
     display: block;
+    grid-column: 4 / 5;
+    grid-row: 1 / 1;
+    grid-auto-flow: dense;
+
+    @media (--query-mobile) {
+      grid-row: 2 / 3;
+    }
     &:first-of-type {
-      text-align: right;
+      grid-column: 1 / 2;
+      justify-self: end;
+
+      @media (--query-tablet) {
+        justify-self: start;
+      }
+
+      @media (--query-mobile) {
+        justify-self: start;
+        grid-row: 2 / 3;
+      }
     }
   }
 }
@@ -77,6 +117,17 @@
 
   flex-basis: max-content;
   flex-shrink: 0;
+
+  justify-self: end;
+}
+
+.controlGroup {
+  grid-area: controls;
+  justify-self: center;
+}
+
+.volumeControlGroup {
+  grid-area: volume-control;
 }
 
 .iconButton {
@@ -99,10 +150,11 @@
   place-content: center;
 
   &:hover {
-    background-color: var(--color-white);
-
-    svg {
-      stroke: black;
+    &:not(:disabled) {
+      background-color: var(--color-white);
+      svg {
+        stroke: black;
+      }
     }
   }
 }
@@ -116,24 +168,22 @@
   --thumb-color: var(--color-white);
   --thumb-height: 0.5rem;
   --thumb-width: 0.5rem;
-  --track-heigth: 0.2rem;
+  --track-heigth: 0.3rem;
   --track-width: 100%;
 
   position: relative;
   background-color: var(--color-gray-700);
   width: var(--track-width);
   height: var(--track-heigth);
-  border-radius: 1000px;
+  border-radius: 1000px 1000px 1000px 1000px;
 
   /* Barra del progreso */
   &::after {
     content: "";
     height: var(--track-heigth);
-    width: var(--track-width);
-    transform: scaleX(var(--progress-width));
-    transform-origin: left;
+    width: calc(var(--progress-width) * 100%);
     background-color: var(--color-white);
-    border-radius: 1000px;
+    border-radius: 1000px 1000px 1000px 1000px;
     position: absolute;
     left: 0;
     top: 0;
@@ -173,8 +223,8 @@
   height: 1rem;
   background-color: transparent;
   z-index: 2;
-  border-radius: 1000px;
-  transform: translateY(-40%);
+  border-radius: 1000px 1000px 1000px 1000px;
+  transform: translateY(-35%);
 
   &::-moz-range-thumb {
     opacity: 0;
@@ -208,15 +258,38 @@
   }
 }
 
+.volumeProgressBar {
+  width: 100%;
+
+  &.vertical {
+    width: 120px;
+  }
+}
+
+.verticalSliderWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transform: rotate(-90deg);
+  background-color: var(--color-black);
+  border-radius: 1000px;
+  border: 1px solid var(--color-white);
+  padding: 8px 8px 8px 32px;
+  svg {
+    transform: rotate(90deg);
+  }
+}
+
 .volumeProgressBar input[type="range"] {
   --thumb-color: var(--color-white);
   --thumb-height: 0.5rem;
   --thumb-width: 0.5rem;
   --track-width: 100%;
 
-  height: 0.2rem;
+  height: 0.3rem;
   position: static;
   transform: translate(0);
+  border-radius: 1000px 1000px 1000px 1000px;
 
   background: linear-gradient(var(--color-white), var(--color-white)) 0% /
       var(--value) no-repeat,
@@ -224,11 +297,12 @@
 
   &::after {
     padding: 16px 0px;
+    border-radius: 1000px 1000px 1000px 1000px;
   }
 
   &::-moz-range-progress {
     background-color: var(--color-white);
-    border-radius: 1000px;
+    border-radius: 1000px 1000px 1000px 1000px;
   }
 
   &:hover {

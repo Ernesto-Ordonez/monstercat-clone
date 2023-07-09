@@ -14,19 +14,19 @@ import Spacer from "./components/Spacer/Spacer";
 
 const App = () => {
   // Debug para los media queries
-  const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
+  // const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
 
-  React.useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
+  // React.useEffect(() => {
+  //   const handleResize = () => {
+  //     setWindowWidth(window.innerWidth);
+  //   };
 
-    window.addEventListener("resize", handleResize);
+  //   window.addEventListener("resize", handleResize);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
 
   // States
   const [isPlaying, setIsPlaying] = React.useState(false);
@@ -157,9 +157,9 @@ const App = () => {
         <Spacer axis="vertical" size={64} />
         <Footer />
       </div>
-      <div className={styles.queryDebug}>
+      {/* <div className={styles.queryDebug}>
         {windowWidth}px | {windowWidth / 16}rem
-      </div>
+      </div> */}
     </div>
   );
 };
