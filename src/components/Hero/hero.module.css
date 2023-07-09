@@ -37,6 +37,10 @@
   @media (--query-tablet) {
     flex-direction: column;
   }
+
+  @media (--query-mobile) {
+    padding-top: 92px;
+  }
 }
 
 .albumCoverContainer .column {

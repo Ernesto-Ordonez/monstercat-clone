@@ -32,9 +32,12 @@
 
   overflow: auto;
 
+  transform-origin: bottom;
+  animation: slideIn 400ms ease-out;
+
   @media (--query-tablet) {
-    padding-top: 32px;
-    padding-bottom: 20px;
+    padding-top: 24px;
+    padding-bottom: 16px;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
       "song-progress song-progress song-progress"
@@ -42,12 +45,30 @@
   }
 
   @media (--query-mobile) {
+    padding-top: 16px;
     grid-template-columns: 2fr 1fr;
-    gap: 0px 32px;
+    gap: 8px 0px;
     grid-template-areas:
+      "track-info volume-control"
       "song-progress song-progress"
-      "controls controls"
-      "track-info volume-control";
+      "controls controls";
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: scaleY(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.pullUp {
+  @media (--query-mobile) {
+    margin-top: -16px;
   }
 }
 
@@ -60,11 +81,19 @@
 
   .title {
     font-weight: 700;
+
+    @media (--query-mobile) {
+      font-size: 0.8rem;
+    }
   }
 
   .artist {
     font-size: 0.8rem;
     font-weight: 500;
+
+    @media (--query-mobile) {
+      font-size: 0.7rem;
+    }
   }
 }
 
@@ -74,7 +103,7 @@
   grid-template-columns: 5ch 1fr 5ch;
   width: 100%;
   align-items: center;
-  gap: 16px;
+  gap: 8px 16px;
 
   div {
     grid-column: 2 / 4;
@@ -89,6 +118,7 @@
     grid-column: 4 / 5;
     grid-row: 1 / 1;
     grid-auto-flow: dense;
+    font-size: 0.8rem;
 
     @media (--query-mobile) {
       grid-row: 2 / 3;
@@ -131,23 +161,31 @@
 }
 
 .iconButton {
+  --btn-resize: 0px;
   --btn-size: 64px;
+  --btn-computed-size: calc(var(--btn-size) - var(--btn-resize));
 
   appearance: none;
   position: relative;
   background: none;
-  min-width: var(--btn-size);
-  min-height: var(--btn-size);
+  min-width: var(--btn-computed-size);
+  min-height: var(--btn-computed-size);
   /* border: 1px solid var(--color-white); */
   border: none;
   border-radius: 4000px;
 
-  flex-basis: var(--btn-size);
+  flex-basis: var(--btn-computed-size);
   flex-shrink: 0;
   flex-grow: 0;
 
   display: grid;
   place-content: center;
+
+  &:disabled {
+    svg {
+      stroke: var(--color-gray-600);
+    }
+  }
 
   &:hover {
     &:not(:disabled) {
@@ -156,6 +194,10 @@
         stroke: black;
       }
     }
+  }
+
+  @media (--query-mobile) {
+    --btn-size: 48px;
   }
 }
 

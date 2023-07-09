@@ -41,4 +41,7 @@
   width: 52px;
   height: auto;
   object-fit: cover;
+  @media (--query-mobile) {
+    width: 40px;
+  }
 }

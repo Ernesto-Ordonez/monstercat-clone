@@ -1,3 +1,5 @@
+import cover from "./assets/album_cover.jpg";
+
 function getTrackUrl(name, format) {
   return new URL(`./assets/audio/${name}.${format}`, import.meta.url).href;
 }
@@ -18,6 +20,7 @@ const tychoAlbum = {
   releaseDate: "18/03/2014",
   label: "Ghostly International",
   artist: "Tycho",
+  cover,
   tracks: [
     new Track(1, "Awake", "Tycho", "00:04:43"),
     new Track(2, "Montana", "Tycho", "00:05:26"),

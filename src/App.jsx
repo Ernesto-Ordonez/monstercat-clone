@@ -48,6 +48,7 @@ const App = () => {
     } else {
       try {
         await audioRef.current?.play();
+        await updateMedia();
         setIsPlaying(true);
       } catch (e) {
         console.error(e);
@@ -83,16 +84,22 @@ const App = () => {
     };
   }, [togglePlayPause]);
 
-  const onNext = () => {
+  /* 
+    Meti estas dos funciones en un useCallback para evitar que se
+    ejectuen a costa del efecto que sincroniza con el 
+    API de MediaSession
+  */
+  const onNext = React.useCallback(() => {
     if (currentSongIndex === tychoAlbum.tracks.length - 1) {
       setCurrentSongIndex(-1);
     } else {
       setCurrentSongIndex((i) => i + 1);
     }
-  };
-  const onPrev = () => {
+  }, [currentSongIndex]);
+
+  const onPrev = React.useCallback(() => {
     setCurrentSongIndex((i) => i - 1);
-  };
+  }, []);
 
   const handleSongSelect = (index) => {
     if (currentSongIndex === index) {
@@ -107,6 +114,52 @@ const App = () => {
       setCurrentSongIndex(index);
     }
   };
+
+  // Sinconizar la metadada de MediaSession
+  React.useEffect(() => {
+    if (currentSong && "mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: currentSong.name,
+        artist: currentSong.artist,
+        album: tychoAlbum.title,
+        artwork: [
+          {
+            src: tychoAlbum.cover,
+            sizes: "1024x1024",
+            type: "image/png",
+          },
+        ],
+      });
+    }
+  }, [currentSong]);
+
+  // Setear los botones de next/prev en MediaSession
+  React.useEffect(() => {
+    const actionHandlers = [
+      [
+        "previoustrack",
+        () => {
+          onPrev();
+        },
+      ],
+      [
+        "nexttrack",
+        () => {
+          onNext();
+        },
+      ],
+    ];
+
+    for (const [action, handler] of actionHandlers) {
+      try {
+        navigator.mediaSession.setActionHandler(action, handler);
+      } catch (error) {
+        console.log(
+          `The media session action "${action}" is not supported yet.`
+        );
+      }
+    }
+  }, [onNext, onPrev]);
 
   return (
     <div className={styles.wrapper}>
@@ -136,19 +189,21 @@ const App = () => {
               handleSongSelect,
             }}
           />
-          <MusicPlayer
-            currentSong={currentSong}
-            songCount={tychoAlbum.tracks.length}
-            songIndex={currentSongIndex}
-            onNext={onNext}
-            onPrev={onPrev}
-            isPlaying={isPlaying}
-            setIsPlaying={setIsPlaying}
-            isReady={isReady}
-            setIsReady={setIsReady}
-            audioRef={audioRef}
-            togglePlayPause={togglePlayPause}
-          />
+          {currentSongIndex > -1 && (
+            <MusicPlayer
+              currentSong={currentSong}
+              songCount={tychoAlbum.tracks.length}
+              songIndex={currentSongIndex}
+              onNext={onNext}
+              onPrev={onPrev}
+              isPlaying={isPlaying}
+              setIsPlaying={setIsPlaying}
+              isReady={isReady}
+              setIsReady={setIsReady}
+              audioRef={audioRef}
+              togglePlayPause={togglePlayPause}
+            />
+          )}
         </SectionWrapper>
         <SectionWrapper>
           <h2 className={styles.sectionHeader}>Music Video</h2>

@@ -11,10 +11,7 @@ const VolumeInput = ({ volume, onVolumeChange, handleMuteUnmute }) => {
     return (
       <Popover.Root>
         <Popover.Trigger asChild>
-          <button
-            className={styles.iconButton}
-            style={{ "--btn-size": 48 + "px" }}
-          >
+          <button className={`${styles.iconButton}`}>
             <Icon
               id="mute"
               size={16}

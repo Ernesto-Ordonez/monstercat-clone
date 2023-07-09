@@ -103,7 +103,7 @@ const MusicPlayer = ({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.trackInfo}>
+      <div className={`${styles.trackInfo}`}>
         <p className={styles.title}>{currentSong?.name ?? "Select a song"}</p>
         <p className={styles.artist}>{currentSong && currentSong.artist}</p>
       </div>
@@ -134,13 +134,13 @@ const MusicPlayer = ({
         </audio>
       )}
 
-      <div className={styles.controlGroup}>
+      <div className={`${styles.controlGroup} ${styles.pullUp}`}>
         <button
           className={styles.iconButton}
           onClick={handlePrev}
           disabled={songIndex === 0}
           aria-label="go to previous"
-          style={{ "--btn-size": 48 + "px" }}
+          style={{ "--btn-resize": 16 + "px" }}
         >
           <Icon id="back" size={16} strokeWidth={4} color="white" />
         </button>
@@ -149,7 +149,6 @@ const MusicPlayer = ({
           disabled={!isReady}
           onClick={togglePlayPause}
           aria-label={isPlaying ? "Pause" : "Play"}
-          style={{ "--btn-size": 64 + "px" }}
         >
           {!isReady && currentSong ? (
             <Icon
@@ -170,7 +169,7 @@ const MusicPlayer = ({
           onClick={handleNext}
           disabled={songIndex === songCount - 1}
           aria-label="go to next"
-          style={{ "--btn-size": 48 + "px" }}
+          style={{ "--btn-resize": 16 + "px" }}
         >
           <Icon id="forward" size={16} strokeWidth={4} color="white" />
         </button>
